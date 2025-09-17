@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investigación Operativa: Graficador LP 2D</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>Investigación Operativa -MAT-329 SB <BR> ING. JORGE RAMIREZ</h1>
+   
+    <button type="button" class="btn" id="integrantes-link">
+    <strong>INTEGRANTES</strong>
+    <div id="container-stars">
+        <div id="stars"></div>
+    </div>
+
+    <div id="glow">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    </button>
+  <span class="badge">UAGRM-FICCT</span>
+</header>
+
+
+<div class="overlay" id="overlay"></div>
+
+<!-- Sección de integrantes (inicialmente oculta) -->
+<section class="card" id="integrantes-section">
+  <button class="close-btn" id="close-integrantes">&times;</button>
+  <h2>Integrantes del Grupo</h2>
+  
+  <div class="integrante-card">
+    <div class="integrante-nombre">A</div>
+    <div class="integrante-ci">REGISRO: 1</div>
+  </div>
+  <div class="integrante-card">
+    <div class="integrante-nombre">E</div>
+    <div class="integrante-ci">REGISTRO: 1</div>
+  </div>
+  <div class="integrante-card">
+    <div class="integrante-nombre">M</div>
+    <div class="integrante-ci">REGISTRO: 3</div>
+  </div>
+  <div class="integrante-card">
+    <div class="integrante-nombre">k</div>
+    <div class="integrante-ci">REGISTRO: 4</div>
+  </div>
+  <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
+    Esta herramienta fue desarrollada como parte del proyecto de la materia Investigación Operativa.
+  </p>
+</section>
+
+<main>
+  <section class="card" id="panel">
+    <h3 style="margin-top:0">1) Función objetivo (f.O.)</h3>
+    <div class="row" style="margin-bottom:8px">
+      <label class="badge" style="gap:10px">
+        <span>Optimización</span>
+        <select id="sense">
+          <option value="max">Maximizar</option>
+          <option value="min">Minimizar</option>
+        </select>
+      </label>
+    </div>
+    <div class="grid3" style="align-items:end">
+      <span>Z=</span>
+      <div>
+       
+        <input type="number" id="c1" placeholder="ej: 3" step="any" value="3" />
+        
+      </div>
+      <span>x₁ +</span>
+      <div>
+      
+        <input type="number" id="c2" placeholder="ej: 2" step="any" value="2" />
+        
+      </div>
+      <span>x₂</span>
+      
+    </div>
+
+    <h3>2) Restricciones (s.a.)</h3>
+    <div>
+      <label class="mini">No negatividad</label>
+      <div class="row"><input type="checkbox" id="nonneg" checked /><span class="mini">x₁ ≥ 0, x₂ ≥ 0</span></div>
+    </div>
+
+    <div id="constraints"></div>
+    <div class="row" style="margin-top:8px">
+      <button id="addC">+ Añadir restricción</button>
+      <button id="clearC" class="secondary">Limpiar</button>
+    </div>
+
+    <h3>3) Resolver y graficar</h3>
+    <div class="row">
+      <button id="solve">OK • Graficar y Resolver</button>
+      <span class="hint">Se calculan intersecciones (vértices) y se evalúa Z en cada punto factible.</span>
+    </div>
+    <div id="status" style="margin-top:10px"></div>
+    
+    <!-- Botón para móviles para alternar entre formulario y gráfico -->
+    <button class="mobile-toggle" id="toggle-view">Ver Gráfico</button>
+  </section>
+
+  <section class="card graphic-container" id="graphic-section">
+    <div class="legend" style="margin-bottom:8px">
+      <span class="badge">Ejes</span>
+      <span class="badge" style="background:#07172d; border-color:#0b3a75">Rectas de restricciones</span>
+      <span class="badge" style="background:#1f2937">Región factible (punteado)</span>
+      <span class="badge" style="background:#0b1220">Óptimo</span>
+    </div>
+    <canvas id="plot" width="900" height="520"></canvas>
+
+    <h3>Vértices factibles</h3>
+    <div class="warning" id="warn" style="display:none"></div>
+    <div style="overflow:auto; max-height:260px; border:1px solid #1f2937; border-radius:12px; margin-top:8px" class="table-container">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>x₁</th>
+            <th>x₂</th>
+            <th>Z = c₁·x₁ + c₂·x₂</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <h3>Resultado</h3>
+    <div id="result" class="pill">Esperando datos…</div>
+    
+    
+    <!-- Botón para volver al formulario en móviles -->
+    <button class="mobile-toggle" id="toggle-form">Volver al Formulario</button>
+  </section>
+</main>
+<script src="script.js" type="module"></script>
+</body>
+</html>
